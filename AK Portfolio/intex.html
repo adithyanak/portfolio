@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ടൈറ്റിൽ ഇംഗ്ലീഷിലേക്ക് മാറ്റി -->
+    <title>AK | PORTFOLIO</title>
+    
+    <!-- പ്രൊഫഷണൽ ഐക്കണുകൾക്കുള്ള ലിങ്ക് -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* CSS Variables - ഡാർക്ക്/ലൈറ്റ് മോഡ് */
+        :root {
+            --bg-color: #050811;
+            --card-bg: rgba(18, 24, 38, 0.75);
+            --card-hover-bg: rgba(20, 28, 45, 0.85);
+            --text-color: #f1f5f9;
+            --text-muted: #cbd5e1;
+            --border-color: rgba(30, 41, 59, 0.8);
+            --primary-color: #3b82f6;
+            --nav-bg: rgba(11, 15, 25, 0.85);
+            --bg-overlay: rgba(11, 15, 25, 0.85);
+        }
+
+        /* ലൈറ്റ് മോഡിനുള്ള കളറുകൾ */
+        [data-theme="light"] {
+            --bg-color: #f0f4f8;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-hover-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #1e293b;
+            --text-muted: #475569;
+            --border-color: rgba(203, 213, 225, 0.8);
+            --primary-color: #1d4ed8;
+            --nav-bg: rgba(241, 245, 249, 0.85);
+            --bg-overlay: rgba(240, 244, 248, 0.5);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
+                              url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 120px 20px 60px 20px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* ഇവിടെ ലോഗോ മാറ്റിയെഴുതി */
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--text-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+            background: var(--card-bg);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .profile-icon {
+            font-size: 3.8rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: var(--primary-color); 
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        /* ഗ്രിഡ് ലേഔട്ട് */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        /* പ്രീമിയം കാർഡുകൾ */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 15px 35px -15px rgba(0,0,0,0.7);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card.full-width {
+            grid-column: span 2; 
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.25);
+            background: var(--card-hover-bg);
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        h2 i {
+            color: var(--primary-color);
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* സ്കിൽ സെക്ഷൻ */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .badge {
+            background-color: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        [data-theme="light"] .badge {
+            color: var(--primary-color);
+            background-color: rgba(29, 78, 216, 0.08);
+        }
+
+        /* പ്രോജക്ട് ലിസ്റ്റ് */
+        .project-list {
+            margin-top: 15px;
+        }
+        .project-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+        .project-item:last-child {
+            border-bottom: none;
+        }
+        .project-title {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1.15rem;
+            margin-bottom: 5px;
+        }
+        .project-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        /* സോഷ്യൽ ലിങ്കുകൾ */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+        }
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            background: var(--bg-color);
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            background: var(--primary-color);
+            transform: scale(1.15);
+        }
+
+        /* റെസ്പോൺസീവ് ഡിസൈൻ */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .card.full-width {
+                grid-column: span 1;
+            }
+            nav {
+                padding: 15px;
+            }
+            .nav-links {
+                gap: 10px;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            body {
+                padding-top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- നാവിഗേഷൻ ബാർ (ഇവിടെ AK | PORTFOLIO എന്ന് നൽകിയിട്ടുണ്ട്) -->
+    <nav>
+        <a href="#" class="nav-logo">AK | PORTFOLIO</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li>
+                <button class="theme-toggle" id="themeToggleBtn">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    <span id="themeText">Dark</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- ഹെഡർ സെക്ഷൻ -->
+        <header>
+            <div class="profile-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <h1>AK</h1>
+            <p class="subtitle">BSc Computer Science Student</p>
+        </header>
+        
+        <!-- മെയിൻ കണ്ടെന്റ് ഏരിയ -->
+        <div class="main-content">
+            
+            <!-- About Me செക്ഷൻ -->
+            <div class="card" id="about">
+                <h2><i class="fa-solid fa-user"></i> About Me</h2>
+                <p>പഠനത്തിലും പുതിയ സാങ്കേതിക വിദ്യകൾ മനസ്സിലാക്കുന്നതിലും താല്പര്യമുള്ള കണ്ണൂർ സ്വദേശിയായ ഒരു കമ്പ്യൂട്ടർ സയൻസ് വിദ്യാർത്ഥിയാണ് ഞാൻ. Cyber Security, Web Development, Programming എന്നിവയാണ് പ്രധാന താല്പര്യങ്ങൾ.</p>
+            </div>
+
+            <!-- My Skills செക്ഷൻ -->
+            <div class="card" id="skills">
+                <h2><i class="fa-solid fa-code"></i> My Skills</h2>
+                <div class="skills">
+                    <span class="badge"><i class="fa-solid fa-terminal"></i> C Programming</span>
+                    <span class="badge"><i class="fa-brands fa-html5"></i> HTML & CSS</span>
+                    <span class="badge"><i class="fa-solid fa-shield-halved"></i> Cyber Security</span>
+                    <span class="badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Tech</span>
+                </div>
+            </div>
+
+            <!-- Projects செക്ഷൻ -->
+            <div class="card full-width" id="projects">
+                <h2><i class="fa-solid fa-laptop-code"></i> Projects</h2>
+                <div class="project-list">
+                    <div class="project-item">
+                        <div class="project-title">ഹോസ്പിറ്റൽ മാനേജ്‌മെന്റ് സിസ്റ്റം (C Language)</div>
+                        <p>സി പ്രോഗ്രാമിങ് ഉപയോഗിച്ച് ഫയൽ ഹാൻഡ്‌ലിങ് ഫീച്ചറുകൾ ഉൾപ്പെടുത്തി നിർമ്മിച്ച ഒരു കൺസോൾ ആപ്ലിക്കേഷൻ.</p>
+                        <a href="#" class="project-link"><i class="fa-brands fa-github"></i> View on GitHub</a>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title">വ്യക്തിഗത പോർട്ട്‌ഫോളിയോ വെബ്‌സൈറ്റ്</div>
+                        <p>HTML, CSS, ജാവാസ്ക്രിപ്റ്റ് എന്നിവ ഉപയോഗിച്ച് നിർമ്മിച്ച ഈ ആധുനിക പോർっとഫോളിയോ വെബ്‌സൈറ്റ്.</p>
+                        <a href="#" class="project-link"><i class="fa-brands fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connect With Me செക്ഷൻ -->
+            <div class="card full-width" id="contact" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <h2><i class="fa-solid fa-paper-plane"></i> Connect With Me</h2>
+                <p>നിങ്ങൾക്ക് എന്നെ താഴെ കാണുന്ന സോഷ്യൽ മീഡിയ പ്ലാറ്റ്‌ഫോമുകളിലൂടെ ബന്ധപ്പെടാം:</p>
+                <div class="social-links">
+                    <a href="https://github.com/YOUR_USERNAME" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:yourmail@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ജാവാസ്ക്രിപ്റ്റ് -->
+    <script>
+        const toggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            let newTheme = 'dark';
+
+            if (currentTheme === 'dark' || !currentTheme) {
+                newTheme = 'light';
+            }
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+
+            if (newTheme === 'light') {
+                themeIcon.className = 'fa-solid fa-sun';
+                themeText.innerText = 'Light';
+            } else {
+                themeIcon.className = 'fa-solid fa-moon';
+                themeText.innerText = 'Dark';
+            }
+        });
+    </script>
+
+</body>
+</html>
